@@ -14,6 +14,9 @@ public class DoLogout implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
+                // Give React time to finish any pending re-renders before clicking
+                WaitUntil.the(AppHeaderUI.LOGOUT_BUTTON, WebElementStateMatchers.isClickable())
+                        .forNoMoreThan(10).seconds(),
                 Click.on(AppHeaderUI.LOGOUT_BUTTON),
                 WaitUntil.the(LoginPageUI.SUBMIT_BUTTON, WebElementStateMatchers.isVisible())
                         .forNoMoreThan(10).seconds()

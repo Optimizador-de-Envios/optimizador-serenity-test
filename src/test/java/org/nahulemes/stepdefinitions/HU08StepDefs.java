@@ -33,7 +33,7 @@ public class HU08StepDefs {
 
     @Dado("que el usuario ya está registrado en la plataforma")
     public void usuarioYaEstaRegistrado() {
-        // The test user qa.usuario@example.com must be pre-seeded in the DB
+        OnStage.theActorCalled("Usuario");
     }
 
     @Cuando("ingresa correo {string} y contraseña {string}")
@@ -58,7 +58,7 @@ public class HU08StepDefs {
 
     @Dado("que el usuario autenticado tiene historial de pedidos visible")
     public void usuarioConHistorialVisible() {
-        OnStage.theActorInTheSpotlight().attemptsTo(
+        OnStage.theActorCalled("Usuario").attemptsTo(
                 DoLogin.withDefaultTestUser(),
                 NavigateToHistory.page()
         );
@@ -98,7 +98,7 @@ public class HU08StepDefs {
 
     @Dado("que el usuario inició sesión correctamente")
     public void usuarioInicioSesion() {
-        OnStage.theActorInTheSpotlight().attemptsTo(
+        OnStage.theActorCalled("Usuario").attemptsTo(
                 DoLogin.withDefaultTestUser()
         );
         OnStage.theActorInTheSpotlight().attemptsTo(

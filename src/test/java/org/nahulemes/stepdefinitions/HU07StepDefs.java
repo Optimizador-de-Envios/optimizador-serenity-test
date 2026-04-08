@@ -22,7 +22,7 @@ public class HU07StepDefs {
 
     @Dado("que una persona desea utilizar la plataforma")
     public void personaDeseaUtilizarPlataforma() {
-        // Actor is set on stage via the Hook @Before — no additional action needed
+        OnStage.theActorCalled("Nuevo usuario");
     }
 
     @Cuando("ingresa nombre {string}, un correo único y contraseña {string}")

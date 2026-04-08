@@ -14,7 +14,7 @@ public class RegisterPageUI {
             Target.the("password input").locatedBy("#register-password");
 
     public static final Target SUBMIT_BUTTON =
-            Target.the("register submit button").locatedBy("button[type='submit']");
+            Target.the("register submit button").locatedBy("//button[@type='submit']");
 
     public static final Target ERROR_MESSAGE =
             Target.the("register error message").locatedBy("[role='alert']");

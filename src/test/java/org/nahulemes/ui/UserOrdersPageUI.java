@@ -14,7 +14,7 @@ public class UserOrdersPageUI {
             Target.the("orders error message").locatedBy("[data-testid='orders-error']");
 
     public static final Target ORDER_ITEMS =
-            Target.the("order history items").locatedBy("article");
+            Target.the("order history items").locatedBy("//article");
 
     private UserOrdersPageUI() {
     }

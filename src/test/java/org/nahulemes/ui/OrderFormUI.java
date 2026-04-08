@@ -15,7 +15,7 @@ public class OrderFormUI {
             Target.the("weight input").locatedBy("[data-testid='input-weight']");
 
     public static final Target SUBMIT_BUTTON =
-            Target.the("calculate shipping button").locatedBy("button[type='submit']");
+            Target.the("calculate shipping button").locatedBy("//button[@type='submit']");
 
     public static final Target ORDER_SUCCESS =
             Target.the("order success message").locatedBy("[data-testid='order-success']");

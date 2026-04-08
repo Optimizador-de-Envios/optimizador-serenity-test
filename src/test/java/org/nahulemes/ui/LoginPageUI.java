@@ -11,7 +11,7 @@ public class LoginPageUI {
             Target.the("password input").locatedBy("#login-password");
 
     public static final Target SUBMIT_BUTTON =
-            Target.the("login submit button").locatedBy("button[type='submit']");
+            Target.the("login submit button").locatedBy("//button[@type='submit']");
 
     public static final Target ERROR_MESSAGE =
             Target.the("login error message").locatedBy("[role='alert']");

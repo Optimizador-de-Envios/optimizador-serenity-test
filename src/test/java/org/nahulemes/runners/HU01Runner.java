@@ -12,6 +12,6 @@ import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features/hu01_registro_pedido.feature")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "org.nahulemes")
-@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "io.cucumber.core.plugin.SerenityReporterParallel")
+@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "net.serenitybdd.cucumber.core.plugin.SerenityReporterParallel")
 public class HU01Runner {
 }

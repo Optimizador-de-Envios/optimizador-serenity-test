@@ -17,6 +17,7 @@ import org.nahulemes.tasks.SelectLocationFromAutocomplete;
 import org.nahulemes.questions.AutocompleteSuggestionsContainCountry;
 import org.nahulemes.questions.ElementIsVisible;
 import org.nahulemes.ui.OrderFormUI;
+import org.nahulemes.ui.PrioritySelectorUI;
 import org.nahulemes.util.TestData;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
@@ -27,7 +28,7 @@ public class HU01StepDefs {
 
     @Dado("que el usuario está autenticado en la plataforma")
     public void usuarioAutenticado() {
-        OnStage.theActorInTheSpotlight().attemptsTo(
+        OnStage.theActorCalled("Usuario").attemptsTo(
                 DoLogin.withDefaultTestUser()
         );
     }
@@ -52,13 +53,16 @@ public class HU01StepDefs {
 
     @Entonces("el formulario avanza al cálculo conservando los datos")
     public void formularioAvanzaAlCalculo() {
+        // Clicking submit transitions the form step → priority step in one React 18 batch,
+        // so 'order-success' is never rendered.  The visible indicator that the order was
+        // accepted is the PrioritySelector appearing immediately after submit.
         OnStage.theActorInTheSpotlight().attemptsTo(
                 Click.on(OrderFormUI.SUBMIT_BUTTON),
-                WaitUntil.the(OrderFormUI.ORDER_SUCCESS, WebElementStateMatchers.isVisible())
+                WaitUntil.the(PrioritySelectorUI.COST_OPTION, WebElementStateMatchers.isVisible())
                         .forNoMoreThan(10).seconds()
         );
         OnStage.theActorInTheSpotlight().should(
-                seeThat(ElementIsVisible.of(OrderFormUI.ORDER_SUCCESS), is(true))
+                seeThat(ElementIsVisible.of(PrioritySelectorUI.COST_OPTION), is(true))
         );
     }
 

@@ -5,7 +5,10 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
+import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.nahulemes.hooks.OpenBrowser;
+import org.nahulemes.ui.AppHeaderUI;
 import org.nahulemes.ui.LoginPageUI;
 import org.nahulemes.util.TestData;
 
@@ -25,7 +28,14 @@ public class DoLogin implements Task {
                 OpenBrowser.withUrl(TestData.APP_URL + TestData.LOGIN_PATH),
                 Enter.theValue(email).into(LoginPageUI.EMAIL_INPUT),
                 Enter.theValue(password).into(LoginPageUI.PASSWORD_INPUT),
-                Click.on(LoginPageUI.SUBMIT_BUTTON)
+                Click.on(LoginPageUI.SUBMIT_BUTTON),
+                // Wait for the logout button to appear — confirms the async login API
+                // call completed, the JWT was stored in localStorage, and React
+                // redirected to the authenticated app.  Without this wait,
+                // subsequent driver.get("/") calls can interrupt the in-flight
+                // fetch and leave localStorage empty.
+                WaitUntil.the(AppHeaderUI.LOGOUT_BUTTON, WebElementStateMatchers.isVisible())
+                        .forNoMoreThan(15).seconds()
         );
     }
 

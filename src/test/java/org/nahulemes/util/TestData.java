@@ -20,8 +20,8 @@ public final class TestData {
 
     // ── Usuario secundario (para aislamiento de sesión) ─────────────────────
     public static final String TEST_USER_B_EMAIL    = "qa.usuariob@example.com";
-    public static final String TEST_USER_B_PASSWORD = "Password456";
-    public static final String TEST_USER_B_NAME     = "Usuario QB";
+    public static final String TEST_USER_B_PASSWORD = "Password123";
+    public static final String TEST_USER_B_NAME     = "QA Usuario B";
 
     // ── Registro único (sufijo timestamp para evitar duplicados) ─────────────
     public static final String REGISTER_NAME          = "Usuario QA";

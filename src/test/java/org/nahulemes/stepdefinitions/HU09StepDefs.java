@@ -10,6 +10,7 @@ import org.nahulemes.questions.ElementIsVisible;
 import org.nahulemes.questions.OrderHistoryCount;
 import org.nahulemes.tasks.ConfirmProvider;
 import org.nahulemes.tasks.DoLogin;
+import org.nahulemes.tasks.DoLogout;
 import org.nahulemes.tasks.FillOrderForm;
 import org.nahulemes.tasks.NavigateToHistory;
 import org.nahulemes.tasks.SelectPriority;
@@ -57,14 +58,19 @@ public class HU09StepDefs {
 
     @Dado("que el usuario autenticado no tiene pedidos registrados")
     public void usuarioSinPedidos() {
-        // Log in with a fresh test user that has no orders
+        // Logout qa.usuario (from background) then login as qa.usuariob (no orders)
         OnStage.theActorInTheSpotlight().attemptsTo(
+                DoLogout.now(),
                 DoLogin.withCredentials(TestData.TEST_USER_B_EMAIL, TestData.TEST_USER_B_PASSWORD)
         );
     }
 
     @Entonces("el sistema informa que no existen pedidos registrados")
     public void sistemaInformaSinPedidos() {
+        OnStage.theActorInTheSpotlight().attemptsTo(
+                WaitUntil.the(UserOrdersPageUI.ORDERS_EMPTY, WebElementStateMatchers.isVisible())
+                        .forNoMoreThan(10).seconds()
+        );
         OnStage.theActorInTheSpotlight().should(
                 seeThat(ElementIsVisible.of(UserOrdersPageUI.ORDERS_EMPTY), is(true))
         );

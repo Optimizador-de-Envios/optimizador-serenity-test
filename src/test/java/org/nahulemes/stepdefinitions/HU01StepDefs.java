@@ -35,7 +35,6 @@ public class HU01StepDefs {
 
     @Dado("que el usuario autenticado necesita enviar un producto")
     public void usuarioNecesitaEnviar() {
-        // Authentication already done in background step
         OnStage.theActorInTheSpotlight().attemptsTo(
                 OpenBrowser.withUrl(TestData.APP_URL + TestData.ORDER_PATH)
         );
